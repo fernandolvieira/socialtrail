@@ -4,7 +4,7 @@ const GOOGLE_SHEETS_URL = "COLE_AQUI_A_SUA_URL_GERADA_NO_PASSO_3";
 // VARIÁVEIS DE ESTADO
 let teamName = "";
 let currentEnigma = 1;
-let xp = 100; // Começa com 100 na T1
+let xp = 100; 
 let badges = [];
 let currentDecision = 0;
 let timerInterval;
@@ -15,7 +15,7 @@ let timeStart;
 let timeEnd;
 let totalSeconds = 0;
 
-// BANCO DE DADOS DAS DECISÕES DA TEMPORADA 2 (AGORA 10 FASES)
+// BANCO DE DADOS DAS DECISÕES DA TEMPORADA 2 (10 FASES)
 const t2Decisions = [
     {
         title: "Fase 1: A Call Tóxica",
@@ -115,16 +115,19 @@ function showScreen(id) {
     document.getElementById(id).classList.add('active');
 }
 
+function nextScreen(nextId) {
+    showScreen(nextId);
+}
+
 function updateXPUI(amount) {
     xp += amount;
     document.getElementById('xp-counter').innerText = xp;
     
-    // Animação visual do XP
     const animEl = document.getElementById('xp-anim');
     animEl.innerText = amount > 0 ? `+${amount}` : amount;
     animEl.style.color = amount > 0 ? "var(--success)" : "var(--error)";
     animEl.style.animation = "none";
-    void animEl.offsetWidth; // trigger reflow
+    void animEl.offsetWidth; 
     animEl.style.animation = "floatUp 1s ease-out forwards";
 }
 
@@ -137,16 +140,16 @@ function startGame() {
     teamName = nameInput;
     timeStart = new Date(); 
     
-    // Mostra barra de status já na T1
+    showScreen('screen-briefing');
+}
+
+function startEnigmas() {
     document.getElementById('status-bar').classList.remove('hidden');
     document.getElementById('xp-counter').innerText = xp;
-    
     showScreen('screen-e1');
 }
 
 // LÓGICA DA TEMPORADA 1 (Com penalidades e recompensas)
-let attempts = {};
-
 function checkPassword(enigmaNum, correctPassword, isLast = false) {
     const inputId = `input-e${enigmaNum}`;
     const feedbackId = `feedback-e${enigmaNum}`;
@@ -156,19 +159,13 @@ function checkPassword(enigmaNum, correctPassword, isLast = false) {
     const normalizedCorrect = correctPassword.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
     if (normalizedGuess === normalizedCorrect || guess === "PULAR") { 
-        document.getElementById(feedbackId).innerText = "Firewall Quebrado! Acesso liberado.";
+        document.getElementById(feedbackId).innerText = "Firewall Quebrado! +20 XP";
         document.getElementById(feedbackId).style.color = "var(--success)";
-        
-        // Se acertou de primeira, ou se acertou após errar (dá XP positivo, mas sofreu as penalidades antes)
         updateXPUI(20);
 
-        setTimeout(() => {
-            if (isLast) {
-                showScreen('screen-transition');
-            } else {
-                showScreen(`screen-e${enigmaNum + 1}`);
-            }
-        }, 1200);
+        document.getElementById(`action-e${enigmaNum}`).classList.add('hidden');
+        document.getElementById(`explanation-e${enigmaNum}`).classList.remove('hidden');
+
     } else {
         document.getElementById(feedbackId).innerText = "Acesso Negado. -5 XP. Tente novamente.";
         updateXPUI(-5);
@@ -183,7 +180,6 @@ function startSeason2() {
 
 function updateStatusBarT2() {
     document.getElementById('xp-counter').innerText = xp;
-    // Mostra apenas o EMOJI no topo para não poluir
     const emojis = badges.map(b => b.split(' ')[0]);
     document.getElementById('badge-container').innerText = emojis.join(' ');
 }
@@ -224,7 +220,6 @@ function startTimer() {
 
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
-            // Penalidade de AFK por não responder
             makeChoice(-30, "⏳ AFK (Omissão por lentidão)");
         }
     }, 1000);
@@ -250,7 +245,6 @@ function endGame() {
 
     document.getElementById('final-xp').innerText = xp;
     
-    // Lista todas as badges por extenso no final
     const badgesUl = document.getElementById('final-badges');
     badgesUl.innerHTML = "";
     badges.forEach(b => {
@@ -264,7 +258,6 @@ function endGame() {
 
     let statusText = "";
 
-    // T1 Max ~180 XP. T2 pode dar +500 XP. Total Máx ~680. Min pode ser muito negativo.
     if (xp < 150) {
         titleEl.innerText = "Game Over / Conta Banida (Tóxico)";
         titleEl.style.color = "var(--error)";
