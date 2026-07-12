@@ -113,15 +113,26 @@ h1, h2, h3 {
     background-color: #238636;
 }
 
-input[type="text"] {
+input[type="text"], textarea {
     width: calc(100% - 22px);
     padding: 10px;
     background-color: #0d1117;
     border: 1px solid #30363d;
+    color: var(--text-main);
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+input[type="text"] {
     color: var(--accent);
     font-family: monospace;
     font-size: 16px;
-    margin-bottom: 10px;
+}
+
+textarea {
+    resize: vertical;
 }
 
 button {
@@ -140,6 +151,12 @@ button {
 
 button:hover {
     background-color: #3182ce;
+}
+
+button:disabled {
+    background-color: #30363d;
+    color: #8b949e;
+    cursor: not-allowed;
 }
 
 .feedback-error {
@@ -236,6 +253,15 @@ button:hover {
     margin: 20px 0;
     border-radius: 8px;
     font-size: 16px;
+    text-align: left;
+}
+
+.report-section {
+    background: #161b22;
+    padding: 15px;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    margin-bottom: 15px;
     text-align: left;
 }
 
