@@ -1,5 +1,5 @@
 // === COLOQUE A SUA URL AQUI DENTRO DAS ASPAS ===
-const GOOGLE_SHEETS_URL = "COLE_AQUI_A_SUA_URL_GERADA_NO_PASSO_3";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwluLT0RgSdpgX9vwK2gvV0rbRMV7nSmbXQxex2ojLFdPQcaZKF59-P39BdVsVfUHW1/exec";
 
 // VARIÁVEIS DE ESTADO
 let teamName = "";
