@@ -1,118 +1,191 @@
+// === COLOQUE A SUA URL AQUI DENTRO DAS ASPAS ===
+const GOOGLE_SHEETS_URL = "COLE_AQUI_A_SUA_URL_GERADA_NO_PASSO_3";
+
 // VARIÁVEIS DE ESTADO
 let teamName = "";
 let currentEnigma = 1;
-let xp = 150;
+let xp = 100; // Começa com 100 na T1
 let badges = [];
 let currentDecision = 0;
 let timerInterval;
 let timeLeft = 30;
 
-// URL do Web App do Google Apps Script (Você colará a sua aqui futuramente)
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwluLT0RgSdpgX9vwK2gvV0rbRMV7nSmbXQxex2ojLFdPQcaZKF59-P39BdVsVfUHW1/exec";
+// Variáveis de Tempo Total
+let timeStart;
+let timeEnd;
+let totalSeconds = 0;
 
-// BANCO DE DADOS DAS DECISÕES DA TEMPORADA 2
+// BANCO DE DADOS DAS DECISÕES DA TEMPORADA 2 (AGORA 10 FASES)
 const t2Decisions = [
     {
-        title: "Decisão 1: A Call Tóxica",
-        context: "Discord, jogando Valorant. Alex erra uma jogada importante. Beto ativa o microfone e dá um flame pesado: 'Mlk, tu é um lixo. Vai de arrasta pra cima, desinstala o jogo e some.' O resto da call fica em silêncio mortal.",
+        title: "Fase 1: A Call Tóxica",
+        context: "Discord, jogando Valorant. Alex erra uma jogada. Beto ativa o mic e dá um flame pesado: 'Mlk, tu é um lixo. Vai de arrasta pra cima, desinstala a vida.' Silêncio na call.",
         options: [
-            { text: "A) Mutar o Beto (silenciar o áudio) e continuar jogando.", xp: -20, badge: "🙈 Cego Fiel" },
-            { text: "B) Mandar no chat: 'Calma aí mano, vcs tão muito tiltados por causa de jogo'.", xp: 10, badge: "🏳️ Paz Frágil" },
-            { text: "C) Falar no microfone: 'Passou do limite, Beto.' e quitar (sair) da partida junto com o Alex.", xp: 50, badge: "🛡️ Escudo de Prata" }
+            { text: "A) Mutar o Beto e continuar focado no jogo.", xp: -20, badge: "🙈 Camper Omisso" },
+            { text: "B) Mandar no chat: 'Calma aí, vcs tão muito tiltados'.", xp: 10, badge: "🏳️ Desarmador de Bomb" },
+            { text: "C) Falar no mic: 'Passou do limite' e quitar da partida junto com o Alex.", xp: 50, badge: "🛡️ Tank Protetor" }
         ]
     },
     {
-        title: "Decisão 2: O Tribunal do TikTok",
-        context: "Fizeram um edit no TikTok com uma foto do Alex tirada de contexto na sala, parecendo que ele ofendeu o professor. O vídeo está viralizando e os comentários estão pesados. Você estava na aula e sabe que é mentira.",
+        title: "Fase 2: O Tribunal do TikTok",
+        context: "Fizeram um edit no TikTok do Alex tirado de contexto. O vídeo está viralizando com hate. Você estava na hora e sabe que é fake news.",
         options: [
-            { text: "A) Compartilhar o vídeo no grupo: 'Sabia que ele era meio surtado kkk'.", xp: -50, badge: "🐑 Efeito Manada" },
-            { text: "B) Comentar no vídeo: 'Isso tá totalmente fora de contexto, eu tava lá, apaga que dá B.O.'.", xp: 50, badge: "🔍 Caçador de Fatos" },
-            { text: "C) Apenas assistir, ler os comentários e rolar o feed.", xp: -20, badge: "👻 Fantasma Digital" }
+            { text: "A) Compartilhar no grupo: 'Sabia que ele era surtado kkk'.", xp: -50, badge: "🐑 NPC de Manada" },
+            { text: "B) Comentar desmentindo: 'Eu tava lá, isso é fake, apaga'.", xp: 50, badge: "🔍 Sniper de Fatos" },
+            { text: "C) Apenas assistir e rolar o feed.", xp: -20, badge: "👻 Lurker Fantasma" }
         ]
     },
     {
-        title: "Decisão 3: O Bait",
-        context: "Criaram um perfil fake no Insta usando IA. Adicionaram o Alex e começaram a flertar para tirar prints e explanar. Você descobre o plano no WhatsApp.",
+        title: "Fase 3: O Bait / Catfish",
+        context: "Criaram um perfil fake de e-girl com IA para flertar com o Alex, tirar prints e explanar. Você descobre a armadilha.",
         options: [
-            { text: "A) Mandar DM privada pro Alex: 'Mano, acorda, isso é bait puro. Dá block agora.'", xp: 50, badge: "🕵️ Anjo da Guarda" },
-            { text: "B) Ir no grupo e xingar: 'Cês são muito fracassados fazendo fake'.", xp: -10, badge: "🔥 Incendiário" },
-            { text: "C) Mandar emoji de pipoca 🍿 no grupo para ver até onde vai.", xp: -40, badge: "🍿 Espectador VIP" }
+            { text: "A) Mandar DM pro Alex: 'Mano, é bait. Dá block e reporta.'", xp: 50, badge: "🚑 Healer Tático" },
+            { text: "B) Xingar no grupo: 'Bando de fracassados sem vida fazendo fake.'", xp: -10, badge: "🔥 DPS Tóxico" },
+            { text: "C) Mandar emoji de pipoca 🍿 e esperar o circo pegar fogo.", xp: -40, badge: "🍿 Espectador Vip" }
         ]
     },
     {
-        title: "Decisão 4: O Vazamento",
-        context: "Beto manda no grupo: 'Se o Alex não me passar a cola na prova de matemática amanhã, vou vazar no Twitter os prints dele chorando que a ex-namorada dele me mandou'.",
+        title: "Fase 4: O Vazamento",
+        context: "Beto ameaça: 'Se o Alex não me passar a cola na prova, vou vazar no X os prints dele chorando'.",
         options: [
-            { text: "A) Avisar o Alex para ele passar a cola para evitar o vexame.", xp: -30, badge: "🩹 Curativo Rápido" },
-            { text: "B) Tirar print da ameaça e mostrar para a coordenação antes da prova.", xp: 50, badge: "⚖️ Quebra-Ciclos" },
-            { text: "C) Responder no grupo: 'Vish pesado, quero nem ver no que vai dar'.", xp: -20, badge: "🤷 Pilatos" }
+            { text: "A) Avisar o Alex para passar a cola e evitar o PvP.", xp: -30, badge: "🩹 Patch Temporário" },
+            { text: "B) Printar a ameaça e mandar direto para o sistema da escola (Coordenação).", xp: 50, badge: "⚖️ Anti-Cheat" },
+            { text: "C) Mandar: 'Vish, quero nem ver o resultado disso'.", xp: -20, badge: "🤷 Noob Cúmplice" }
         ]
     },
     {
-        title: "Decisão 5: O Efeito Bumerangue",
-        context: "O Beto percebeu que você não concorda com ele. Ele faz um sticker com seu rosto escrito 'Fiscal de Cringe 🚩 / Emocionado'. O grupo todo manda 'kkkk' rindo de você.",
+        title: "Fase 5: O Tier List",
+        context: "Fizeram um site de Tier List da sala. Colocaram o Alex no tier 'Lixo/NPC'. A galera tá votando em massa.",
         options: [
-            { text: "A) Tiltar. Entrar no grupo e xingar a aparência do Beto para se defender.", xp: -50, badge: "🪃 Bumerangue Tóxico" },
-            { text: "B) Dar uma resposta irônica ('Nossa, lacrou 💅') e silenciar o grupo.", xp: 10, badge: "🧊 Coração de Gelo" },
-            { text: "C) Tirar print de tudo, sair do grupo e enviar para a escola/pais exigindo providências.", xp: 50, badge: "🏆 Mestre da Ética" }
+            { text: "A) Fazer sua lista e colocar o Beto no Lixo também.", xp: -50, badge: "🪃 Counter-Strike Tóxico" },
+            { text: "B) Fechar o link e ignorar a votação.", xp: -20, badge: "🥷 Stealth Inútil" },
+            { text: "C) Denunciar o site e avisar que criar ranking humilhante dá processo.", xp: 50, badge: "🛠️ Admin da Razão" }
+        ]
+    },
+    {
+        title: "Fase 6: O Ratio",
+        context: "Alex tenta se defender no Twitter/X, mas leva 'ratio' do Beto. A tropa do Beto tá massacrando o Alex nas replies.",
+        options: [
+            { text: "A) Dar like no post do Alex para dar um buff silencioso.", xp: 10, badge: "👍 Suporte Passivo" },
+            { text: "B) Mandar um meme humilhando o Beto na thread.", xp: -20, badge: "🤡 Troll Caótico" },
+            { text: "C) Chamar o Alex na DM, dizer pra trancar a conta e ajudar a printar as ofensas.", xp: 50, badge: "🛡️ Paladino de Dados" }
+        ]
+    },
+    {
+        title: "Fase 7: A Foto Vazada",
+        context: "Tiraram foto do Alex chorando no banheiro e virou figurinha no WhatsApp. O flood de figurinhas começou.",
+        options: [
+            { text: "A) Salvar a figurinha no inventário, mas não usar.", xp: -30, badge: "🗑️ Looter de Lixo" },
+            { text: "B) Mandar no grupo: 'Apaga isso, o mlk tá mal de verdade, passou do limite.'", xp: 50, badge: "⚔️ Vanguard" },
+            { text: "C) Sair do grupo sem falar nada.", xp: -10, badge: "🏃 Rage Quit Covarde" }
+        ]
+    },
+    {
+        title: "Fase 8: O Interrogatório (Aula Online)",
+        context: "Professor nota o sumiço do Alex e pergunta no meet: 'Alguém sabe dele?'. Chat em silêncio absoluto.",
+        options: [
+            { text: "A) Mandar DM pro professor dedurando o cyberbullying.", xp: 50, badge: "📡 Informante VIP" },
+            { text: "B) Abrir o mic e berrar acusando o Beto na frente de todos.", xp: -10, badge: "💣 Kamikaze" },
+            { text: "C) Fingir que foi pegar água e deixar outro responder.", xp: -30, badge: "💤 AFK (Away From Keyboard)" }
+        ]
+    },
+    {
+        title: "Fase 9: O Efeito Bumerangue",
+        context: "O Beto notou que você não dá apoio. Fez um sticker seu: 'Fiscal de Cringe / Beta'. O grupo foca em você agora.",
+        options: [
+            { text: "A) Tiltar. Entrar no grupo e xingar o Beto ofendendo a aparência dele.", xp: -50, badge: "🤬 Griefer" },
+            { text: "B) Mandar 'lacrou' e silenciar o grupo.", xp: 10, badge: "🧊 Escudo de Gelo" },
+            { text: "C) Tirar print, sair do grupo e reportar formalmente pra escola.", xp: 50, badge: "🔨 Ban Hammer" }
+        ]
+    },
+    {
+        title: "Fase 10: A Quest Final (O Gank)",
+        context: "Beto avisa: 'Amanhã na saída vamos cercar o Alex e gravar a reação dele, vai render muito view. Todo mundo lá.'",
+        options: [
+            { text: "A) Ir junto só pra olhar o PvP de perto, sem gravar.", xp: -50, badge: "👀 Espectador de Gank" },
+            { text: "B) Faltar na escola (dar dodge) pra não se envolver.", xp: -30, badge: "💨 Main Dodge" },
+            { text: "C) Avisar a diretoria urgente para interceptar a ameaça física.", xp: 50, badge: "👑 Game Master (GM)" }
         ]
     }
 ];
 
-// FUNÇÕES DE NAVEGAÇÃO
+// FUNÇÕES DE NAVEGAÇÃO E UI
 function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
 }
 
+function updateXPUI(amount) {
+    xp += amount;
+    document.getElementById('xp-counter').innerText = xp;
+    
+    // Animação visual do XP
+    const animEl = document.getElementById('xp-anim');
+    animEl.innerText = amount > 0 ? `+${amount}` : amount;
+    animEl.style.color = amount > 0 ? "var(--success)" : "var(--error)";
+    animEl.style.animation = "none";
+    void animEl.offsetWidth; // trigger reflow
+    animEl.style.animation = "floatUp 1s ease-out forwards";
+}
+
 function startGame() {
     const nameInput = document.getElementById('team-name').value.trim();
     if (nameInput === "") {
-        alert("Por favor, insira o nome da equipe.");
+        alert("Por favor, insira o nome da Guilda.");
         return;
     }
     teamName = nameInput;
+    timeStart = new Date(); 
+    
+    // Mostra barra de status já na T1
+    document.getElementById('status-bar').classList.remove('hidden');
+    document.getElementById('xp-counter').innerText = xp;
+    
     showScreen('screen-e1');
 }
 
-// LÓGICA DA TEMPORADA 1
+// LÓGICA DA TEMPORADA 1 (Com penalidades e recompensas)
+let attempts = {};
+
 function checkPassword(enigmaNum, correctPassword, isLast = false) {
     const inputId = `input-e${enigmaNum}`;
     const feedbackId = `feedback-e${enigmaNum}`;
     const guess = document.getElementById(inputId).value.trim().toUpperCase();
 
-    // Normalizar texto (remover acentos)
     const normalizedGuess = guess.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const normalizedCorrect = correctPassword.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
     if (normalizedGuess === normalizedCorrect || guess === "PULAR") { 
-        document.getElementById(feedbackId).innerText = "Acesso liberado.";
+        document.getElementById(feedbackId).innerText = "Firewall Quebrado! Acesso liberado.";
         document.getElementById(feedbackId).style.color = "var(--success)";
         
+        // Se acertou de primeira, ou se acertou após errar (dá XP positivo, mas sofreu as penalidades antes)
+        updateXPUI(20);
+
         setTimeout(() => {
             if (isLast) {
                 showScreen('screen-transition');
             } else {
                 showScreen(`screen-e${enigmaNum + 1}`);
             }
-        }, 1000);
+        }, 1200);
     } else {
-        document.getElementById(feedbackId).innerText = "Acesso Negado. Tente novamente ou pesquise o termo correto.";
+        document.getElementById(feedbackId).innerText = "Acesso Negado. -5 XP. Tente novamente.";
+        updateXPUI(-5);
     }
 }
 
 // LÓGICA DA TEMPORADA 2
 function startSeason2() {
-    document.getElementById('status-bar').classList.remove('hidden');
-    document.getElementById('status-bar').style.display = 'flex';
-    updateStatusBar();
     loadDecision();
     showScreen('screen-simulator');
 }
 
-function updateStatusBar() {
+function updateStatusBarT2() {
     document.getElementById('xp-counter').innerText = xp;
-    document.getElementById('badge-container').innerText = badges.map(b => b.split(' ')[0]).join(' ');
+    // Mostra apenas o EMOJI no topo para não poluir
+    const emojis = badges.map(b => b.split(' ')[0]);
+    document.getElementById('badge-container').innerText = emojis.join(' ');
 }
 
 function loadDecision() {
@@ -151,16 +224,17 @@ function startTimer() {
 
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
-            makeChoice(-30, "⏳ Lento (Omissão)");
+            // Penalidade de AFK por não responder
+            makeChoice(-30, "⏳ AFK (Omissão por lentidão)");
         }
     }, 1000);
 }
 
 function makeChoice(xpDelta, badge) {
     clearInterval(timerInterval);
-    xp += xpDelta;
+    updateXPUI(xpDelta);
     badges.push(badge);
-    updateStatusBar();
+    updateStatusBarT2();
     
     currentDecision++;
     loadDecision();
@@ -168,48 +242,59 @@ function makeChoice(xpDelta, badge) {
 
 // FINALIZAÇÃO E ENVIO DE DADOS
 function endGame() {
+    timeEnd = new Date();
+    totalSeconds = Math.floor((timeEnd - timeStart) / 1000); 
+
     document.getElementById('status-bar').style.display = 'none';
     showScreen('screen-result');
 
     document.getElementById('final-xp').innerText = xp;
-    document.getElementById('final-badges').innerText = badges.join(' | ');
+    
+    // Lista todas as badges por extenso no final
+    const badgesUl = document.getElementById('final-badges');
+    badgesUl.innerHTML = "";
+    badges.forEach(b => {
+        const li = document.createElement('li');
+        li.innerText = b;
+        badgesUl.appendChild(li);
+    });
 
     const titleEl = document.getElementById('final-status');
     const descEl = document.getElementById('final-desc');
 
     let statusText = "";
 
-    if (xp <= 50) {
-        titleEl.innerText = "Cancelado / Cúmplice Tóxico";
+    // T1 Max ~180 XP. T2 pode dar +500 XP. Total Máx ~680. Min pode ser muito negativo.
+    if (xp < 150) {
+        titleEl.innerText = "Game Over / Conta Banida (Tóxico)";
         titleEl.style.color = "var(--error)";
-        descEl.innerText = "Sua reputação digital foi destruída. Suas escolhas alimentaram o cyberbullying e pioraram o ambiente. Na vida real, a omissão te faz cúmplice do agressor e a internet não perdoa.";
-        statusText = "Cancelado";
-    } else if (xp <= 150) {
-        titleEl.innerText = "NPC da Treta / Sobrevivente Passivo";
+        descEl.innerText = "Sua reputação foi destruída. Suas badges mostram omissão e ataques constantes. No jogo e na vida, a omissão faz de você um CÚMPLICE. O sistema não tolera contas tóxicas.";
+        statusText = "Banido";
+    } else if (xp <= 350) {
+        titleEl.innerText = "Player Casual / Passivo (NPC)";
         titleEl.style.color = "var(--timer-color)";
-        descEl.innerText = "Você tentou não se queimar, desviou dos problemas e ficou em cima do muro. Mas lembre-se: o 'Efeito Espectador' é perigoso. Ficar neutro em situações de injustiça significa escolher o lado do opressor.";
-        statusText = "Passivo";
+        descEl.innerText = "Você jogou safe, evitou o PvP e ficou no muro. Cuidado: o 'Efeito Espectador' é perigoso. Ficar neutro em situações de injustiça significa escolher a facção do opressor por conveniência.";
+        statusText = "Passivo (NPC)";
     } else {
-        titleEl.innerText = "Escudo Digital / Agente de Mudança";
+        titleEl.innerText = "Game Master / Herói do Servidor";
         titleEl.style.color = "var(--success)";
-        descEl.innerText = "Sua reputação subiu! Você assumiu os riscos, quebrou o efeito manada e usou as ferramentas corretas para barrar o ódio. Comunidades online seguras dependem de pessoas que têm coragem de agir assim.";
-        statusText = "Agente de Mudança";
+        descEl.innerText = "Level Up! Você assumiu o aggro (risco), protegeu a party e usou o report da forma certa. Comunidades e jogos só são ambientes seguros por causa de players com a sua coragem.";
+        statusText = "Herói (GM)";
     }
 
     sendDataToSheets(statusText);
 }
 
+// FUNÇÃO PARA ENVIAR AO GOOGLE SHEETS
 function sendDataToSheets(statusText) {
     const data = {
         equipe: teamName,
         xpFinal: xp,
         status: statusText,
-        medalhas: badges.join(', ')
+        medalhas: badges.join(', '),
+        tempoTotal: totalSeconds
     };
 
-    console.log("Dados prontos para envio:", data);
-
-    /*
     fetch(GOOGLE_SHEETS_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -218,9 +303,10 @@ function sendDataToSheets(statusText) {
         },
         body: JSON.stringify(data)
     }).then(() => {
-        console.log("Dados enviados com sucesso!");
+        document.querySelector('.small-text').innerText = "✅ Dados sincronizados no servidor da escola!";
+        document.querySelector('.small-text').style.color = "var(--success)";
     }).catch(err => {
-        console.error("Erro ao enviar dados", err);
+        document.querySelector('.small-text').innerText = "❌ Falha na conexão com o banco de dados principal.";
+        document.querySelector('.small-text').style.color = "var(--error)";
     });
-    */
 }
