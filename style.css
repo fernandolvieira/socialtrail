@@ -31,7 +31,6 @@ body {
     overflow: hidden;
 }
 
-/* Configuração das Imagens inseridas */
 .header-img {
     width: 100%;
     height: 160px;
@@ -113,7 +112,7 @@ button:hover {
     font-size: 14px;
 }
 
-/* Status Bar T2 */
+/* Status Bar & XP Animations */
 #status-bar {
     display: flex;
     justify-content: space-between;
@@ -123,6 +122,23 @@ button:hover {
     border-bottom: 2px solid var(--accent);
     font-family: sans-serif;
     font-weight: bold;
+    position: relative;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.xp-float {
+    position: absolute;
+    left: 80px;
+    opacity: 0;
+    font-weight: bold;
+}
+
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
 }
 
 /* T2 Options */
@@ -186,7 +202,30 @@ button:hover {
     padding: 20px;
     margin: 20px 0;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 16px;
+    text-align: left;
+}
+
+.badges-list-container {
+    margin-top: 15px;
+}
+
+.badges-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+.badges-list li {
+    background: #161b22;
+    padding: 5px;
+    border: 1px solid #30363d;
+    border-radius: 4px;
 }
 
 .small-text {
