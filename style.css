@@ -50,12 +50,16 @@ body {
     display: block;
 }
 
+.hidden {
+    display: none !important;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-h1, h2 {
+h1, h2, h3 {
     color: var(--accent);
     text-align: center;
 }
@@ -75,6 +79,38 @@ h1, h2 {
     margin-bottom: 20px;
     font-family: sans-serif;
     line-height: 1.5;
+}
+
+.context-expansion {
+    background-color: #0d1117;
+    border: 1px solid var(--success);
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 6px;
+    font-family: sans-serif;
+    box-shadow: inset 0 0 10px rgba(46, 160, 67, 0.2);
+}
+
+.context-expansion h3 {
+    color: var(--success);
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: monospace;
+}
+
+.context-expansion p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.btn-advance {
+    background-color: var(--success);
+    color: white;
+    margin-top: 10px;
+}
+
+.btn-advance:hover {
+    background-color: #238636;
 }
 
 input[type="text"] {
@@ -110,6 +146,7 @@ button:hover {
     color: var(--error);
     margin-top: 10px;
     font-size: 14px;
+    font-weight: bold;
 }
 
 /* Status Bar & XP Animations */
@@ -123,10 +160,6 @@ button:hover {
     font-family: sans-serif;
     font-weight: bold;
     position: relative;
-}
-
-.hidden {
-    display: none !important;
 }
 
 .xp-float {
