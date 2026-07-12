@@ -8,7 +8,7 @@ let timerInterval;
 let timeLeft = 30;
 
 // URL do Web App do Google Apps Script (Você colará a sua aqui futuramente)
-const GOOGLE_SHEETS_URL = "URL_DO_SEU_GOOGLE_APPS_SCRIPT_AQUI";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwluLT0RgSdpgX9vwK2gvV0rbRMV7nSmbXQxex2ojLFdPQcaZKF59-P39BdVsVfUHW1/exec";
 
 // BANCO DE DADOS DAS DECISÕES DA TEMPORADA 2
 const t2Decisions = [
