@@ -10,10 +10,11 @@ let currentDecision = 0;
 let timerInterval;
 let timeLeft = 30;
 
-// Variáveis de Tempo Total
+// Variáveis de Tempo Total e Status
 let timeStart;
 let timeEnd;
 let totalSeconds = 0;
+let finalStatusGlobal = "";
 
 // BANCO DE DADOS DAS DECISÕES DA TEMPORADA 2 (10 FASES)
 const t2Decisions = [
@@ -149,7 +150,7 @@ function startEnigmas() {
     showScreen('screen-e1');
 }
 
-// LÓGICA DA TEMPORADA 1 (Com penalidades e recompensas)
+// LÓGICA DA TEMPORADA 1
 function checkPassword(enigmaNum, correctPassword, isLast = false) {
     const inputId = `input-e${enigmaNum}`;
     const feedbackId = `feedback-e${enigmaNum}`;
@@ -235,7 +236,7 @@ function makeChoice(xpDelta, badge) {
     loadDecision();
 }
 
-// FINALIZAÇÃO E ENVIO DE DADOS
+// FINALIZAÇÃO E APRESENTAÇÃO DE DADOS
 function endGame() {
     timeEnd = new Date();
     totalSeconds = Math.floor((timeEnd - timeStart) / 1000); 
@@ -256,36 +257,52 @@ function endGame() {
     const titleEl = document.getElementById('final-status');
     const descEl = document.getElementById('final-desc');
 
-    let statusText = "";
-
     if (xp < 150) {
         titleEl.innerText = "Game Over / Conta Banida (Tóxico)";
         titleEl.style.color = "var(--error)";
         descEl.innerText = "Sua reputação foi destruída. Suas badges mostram omissão e ataques constantes. No jogo e na vida, a omissão faz de você um CÚMPLICE. O sistema não tolera contas tóxicas.";
-        statusText = "Banido";
+        finalStatusGlobal = "Banido";
     } else if (xp <= 350) {
         titleEl.innerText = "Player Casual / Passivo (NPC)";
         titleEl.style.color = "var(--timer-color)";
         descEl.innerText = "Você jogou safe, evitou o PvP e ficou no muro. Cuidado: o 'Efeito Espectador' é perigoso. Ficar neutro em situações de injustiça significa escolher a facção do opressor por conveniência.";
-        statusText = "Passivo (NPC)";
+        finalStatusGlobal = "Passivo (NPC)";
     } else {
         titleEl.innerText = "Game Master / Herói do Servidor";
         titleEl.style.color = "var(--success)";
         descEl.innerText = "Level Up! Você assumiu o aggro (risco), protegeu a party e usou o report da forma certa. Comunidades e jogos só são ambientes seguros por causa de players com a sua coragem.";
-        statusText = "Herói (GM)";
+        finalStatusGlobal = "Herói (GM)";
+    }
+}
+
+// ENVIO DE DADOS APÓS RELATÓRIO
+function submitFinalReport() {
+    const reportText = document.getElementById('final-report-text').value.trim();
+    
+    if (reportText === "") {
+        alert("Por favor, a guilda precisa preencher as conclusões do relatório antes de enviar.");
+        return;
     }
 
-    sendDataToSheets(statusText);
+    // Trava o botão para não enviarem duas vezes
+    const btn = document.getElementById('submit-report-btn');
+    btn.innerText = "Enviando para os Servidores...";
+    btn.disabled = true;
+
+    document.getElementById('sync-message').classList.remove('hidden');
+
+    sendDataToSheets(finalStatusGlobal, reportText);
 }
 
 // FUNÇÃO PARA ENVIAR AO GOOGLE SHEETS
-function sendDataToSheets(statusText) {
+function sendDataToSheets(statusText, reportText) {
     const data = {
         equipe: teamName,
         xpFinal: xp,
         status: statusText,
         medalhas: badges.join(', '),
-        tempoTotal: totalSeconds
+        tempoTotal: totalSeconds,
+        relatorio: reportText // <-- Novo campo adicionado!
     };
 
     fetch(GOOGLE_SHEETS_URL, {
@@ -296,10 +313,10 @@ function sendDataToSheets(statusText) {
         },
         body: JSON.stringify(data)
     }).then(() => {
-        document.querySelector('.small-text').innerText = "✅ Dados sincronizados no servidor da escola!";
-        document.querySelector('.small-text').style.color = "var(--success)";
+        document.getElementById('sync-message').innerText = "✅ Dados sincronizados no servidor da escola!";
+        document.getElementById('sync-message').style.color = "var(--success)";
     }).catch(err => {
-        document.querySelector('.small-text').innerText = "❌ Falha na conexão com o banco de dados principal.";
-        document.querySelector('.small-text').style.color = "var(--error)";
+        document.getElementById('sync-message').innerText = "❌ Falha na conexão com o banco de dados principal.";
+        document.getElementById('sync-message').style.color = "var(--error)";
     });
 }
