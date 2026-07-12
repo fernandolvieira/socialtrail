@@ -18,7 +18,8 @@
 
         <!-- TELA 0: LOGIN -->
         <section id="screen-login" class="screen active">
-            <img src="/images/image01.png" alt="Abertura" class="header-img">
+            <!-- Caminhos das imagens corrigidos (sem a barra inicial) -->
+            <img src="images/image01.png" alt="Abertura" class="header-img">
             <h1>Sombras Digitais</h1>
             <p>Insira o nome da sua Guilda / Equipe de investigação para acessar os servidores.</p>
             <input type="text" id="team-name" placeholder="Nome da Equipe" autocomplete="off">
@@ -27,7 +28,7 @@
 
         <!-- TELA 0.5: BRIEFING (Contexto Inicial) -->
         <section id="screen-briefing" class="screen">
-            <img src="/images/image01.png" alt="Briefing" class="header-img">
+            <img src="images/image01.png" alt="Briefing" class="header-img">
             <h1>SISTEMA INICIADO</h1>
             <p class="context"><strong>Missão Designada:</strong> Há 24 horas, o usuário da escola conhecido como 'Alex' deletou todas as suas contas, abandonou as aulas e desapareceu dos servidores. Suspeitamos de um ataque coordenado no grupo de alunos '9º Ano - Sem Regras'. <br><br>Seu objetivo é hackear os logs antigos, entender os crimes que foram cometidos e, posteriormente, através do Protocolo Borboleta, voltar no tempo para tentar evitar a tragédia.<br><br>Cuidado: Suas escolhas afetarão seu XP (Reputação) e seu Karma no servidor. O Efeito Manada destruirá sua pontuação.</p>
             <button onclick="startEnigmas()">Iniciar Varredura de Dados</button>
@@ -35,10 +36,10 @@
 
         <!-- TELA 1: T1 - ENIGMA 1 -->
         <section id="screen-e1" class="screen">
-            <img src="/images/image02.png" alt="Arquivos Hackeados" class="header-img">
+            <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
             <div class="terminal-header">Terminal de Recuperação - Arquivo 1/4</div>
             <p class="context"><strong>Log Discord:</strong> Beto posta: "Hoje as 20h vou explanar o 🤓. A thread tá pronta. Só os sigmas online. Quem vier militar leva ban. Quero todo mundo mandando 🍿 no chat."</p>
-            <p class="mission"><strong>Missão:</strong> Qual é o termo (gíria em inglês) para a prática de revelar segredos/intimidades de alguém publicamente para causar linchamento virtual?</p>
+            <p class="mission"><strong>Missão:</strong> Qual é o termo para a prática de revelar segredos/intimidades de alguém publicamente para causar linchamento virtual?</p>
             
             <div id="action-e1">
                 <input type="text" id="input-e1" placeholder="Digite a senha...">
@@ -55,10 +56,10 @@
 
         <!-- TELA 2: T1 - ENIGMA 2 -->
         <section id="screen-e2" class="screen">
-            <img src="/images/image02.png" alt="Arquivos Hackeados" class="header-img">
+            <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
             <div class="terminal-header">Terminal de Recuperação - Arquivo 2/4</div>
             <p class="context"><strong>Fórum Anônimo:</strong> "Mano, cês são muito emocionados e não tankam nada 💀💀. É só um shitpost, o mlk é muito NPC. Chorou demais. F no chat."</p>
-            <p class="mission"><strong>Missão:</strong> Classifique juridicamente esse ato de intimidação sistemática no meio digital que o agressor está chamando de "brincadeira" ou "shitpost".</p>
+            <p class="mission"><strong>Missão:</strong> Classifique juridicamente esse ato de intimidação sistemática no meio digital que o agressor está chamando de "brincadeira".</p>
             
             <div id="action-e2">
                 <input type="text" id="input-e2" placeholder="Digite a senha...">
@@ -75,7 +76,7 @@
 
         <!-- TELA 3: T1 - ENIGMA 3 -->
         <section id="screen-e3" class="screen">
-            <img src="/images/image02.png" alt="Arquivos Hackeados" class="header-img">
+            <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
             <div class="terminal-header">Terminal de Recuperação - Arquivo 3/4</div>
             <p class="context"><strong>WhatsApp Status (Carol):</strong> "Não me envolvo 🤐☕. Cada um com seus B.O. Tô fora de treta." (Dezenas de visualizações no grupo, zero defesas).</p>
             <p class="mission"><strong>Missão:</strong> Qual é o fenômeno psicológico onde indivíduos não ajudam uma vítima simplesmente porque há outras pessoas presentes observando?</p>
@@ -95,7 +96,7 @@
 
         <!-- TELA 4: T1 - ENIGMA 4 -->
         <section id="screen-e4" class="screen">
-            <img src="/images/image02.png" alt="Arquivos Hackeados" class="header-img">
+            <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
             <div class="terminal-header">Terminal de Recuperação - Arquivo 4/4</div>
             <p class="context"><strong>Ameaça Direta:</strong> "Já puxei o IP do Enzo. Mora na rua [apagado]. Se ele não vazar da escola, vou mandar entregar 30 pizzas na casa dele e explanar o CPF no Twitter."</p>
             <p class="mission"><strong>Missão:</strong> Identifique o crime digital onde informações privadas e pessoais (endereço, documentos) são expostas com intenção maliciosa.</p>
@@ -115,7 +116,7 @@
 
         <!-- TELA 5: TRANSIÇÃO -->
         <section id="screen-transition" class="screen transition-screen">
-            <img src="/images/image03.png" alt="Sistema Comprometido" class="header-img">
+            <img src="images/image03.png" alt="Sistema Comprometido" class="header-img">
             <h1>SISTEMA COMPROMETIDO</h1>
             <p>Os logs mostram uma falha ética crítica nesta party (grupo).</p>
             <p class="glitch">Iniciando protocolo Efeito Borboleta...</p>
@@ -125,7 +126,7 @@
 
         <!-- TELA 6: T2 - SIMULADOR DINÂMICO -->
         <section id="screen-simulator" class="screen">
-            <img src="/images/image03.png" alt="Redes Sociais" class="header-img">
+            <img src="images/image03.png" alt="Redes Sociais" class="header-img">
             <div class="timer-bar"><div id="timer-fill"></div></div>
             <h2 id="sim-title">Título</h2>
             <p id="sim-context" class="context">Contexto da situação...</p>
@@ -136,7 +137,7 @@
 
         <!-- TELA 7: RESULTADO FINAL -->
         <section id="screen-result" class="screen result-screen">
-            <img src="/images/image04.png" alt="Resultado Final" class="header-img">
+            <img src="images/image04.png" alt="Resultado Final" class="header-img">
             <h1>Relatório do Servidor</h1>
             <h2 id="final-status">Status</h2>
             <p id="final-desc">Descrição do resultado.</p>
@@ -147,7 +148,16 @@
                     <ul id="final-badges" class="badges-list"></ul>
                 </div>
             </div>
-            <p class="small-text">Sincronizando dados com a base da escola...</p>
+
+            <!-- NOVA SEÇÃO: RELATÓRIO FINAL -->
+            <div class="report-section">
+                <h3>📝 Registro da Guilda</h3>
+                <p style="font-size: 14px;">O que a sua equipe achou da série, das discussões em sala e desta simulação?</p>
+                <textarea id="final-report-text" rows="5" placeholder="Digite as conclusões do grupo aqui..."></textarea>
+                <button id="submit-report-btn" onclick="submitFinalReport()">Enviar Dados para a Coordenação</button>
+            </div>
+
+            <p id="sync-message" class="small-text hidden">Sincronizando dados com a base da escola...</p>
         </section>
 
     </div>
