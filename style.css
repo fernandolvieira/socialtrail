@@ -121,7 +121,7 @@ input[type="text"], textarea {
     color: var(--text-main);
     font-family: sans-serif;
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border-radius: 4px;
 }
 
@@ -129,10 +129,25 @@ input[type="text"] {
     color: var(--accent);
     font-family: monospace;
     font-size: 16px;
+    margin-bottom: 10px;
 }
 
 textarea {
     resize: vertical;
+}
+
+/* Formulário de Relatório */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-bottom: 5px;
+    color: var(--accent);
+    font-size: 14px;
 }
 
 button {
@@ -166,7 +181,7 @@ button:disabled {
     font-weight: bold;
 }
 
-/* Status Bar & XP Animations */
+/* Status Bar & XP */
 #status-bar {
     display: flex;
     justify-content: space-between;
@@ -191,7 +206,7 @@ button:disabled {
     100% { opacity: 0; transform: translateY(-20px); }
 }
 
-/* T2 Options */
+/* Opções Simulator */
 .options-container {
     display: flex;
     flex-direction: column;
@@ -285,6 +300,36 @@ button:disabled {
     padding: 5px;
     border: 1px solid #30363d;
     border-radius: 4px;
+}
+
+/* Glossário */
+.glossary-section {
+    margin-top: 20px;
+    border-top: 1px dashed #30363d;
+    padding-top: 15px;
+}
+
+.glossary-section summary {
+    cursor: pointer;
+    color: var(--timer-color);
+    font-weight: bold;
+    font-family: sans-serif;
+    outline: none;
+}
+
+.glossary-content {
+    margin-top: 10px;
+    background: #161b22;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #30363d;
+    font-family: sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.glossary-content p {
+    margin: 8px 0;
 }
 
 .small-text {
