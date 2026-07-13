@@ -18,7 +18,6 @@
 
         <!-- TELA 0: LOGIN -->
         <section id="screen-login" class="screen active">
-            <!-- Caminhos das imagens corrigidos (sem a barra inicial) -->
             <img src="images/image01.png" alt="Abertura" class="header-img">
             <h1>Sombras Digitais</h1>
             <p>Insira o nome da sua Guilda / Equipe de investigação para acessar os servidores.</p>
@@ -37,19 +36,14 @@
         <!-- TELA 1: T1 - ENIGMA 1 -->
         <section id="screen-e1" class="screen">
             <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
-            <div class="terminal-header">Terminal de Recuperação - Arquivo 1/4</div>
+            <div class="terminal-header">Terminal de Recuperação - Arquivo 1/10</div>
             <p class="context"><strong>Log Discord:</strong> Beto posta: "Hoje as 20h vou explanar o 🤓. A thread tá pronta. Só os sigmas online. Quem vier militar leva ban. Quero todo mundo mandando 🍿 no chat."</p>
             <p class="mission"><strong>Missão:</strong> Qual é o termo para a prática de revelar segredos/intimidades de alguém publicamente para causar linchamento virtual?</p>
-            
-            <div id="action-e1">
-                <input type="text" id="input-e1" placeholder="Digite a senha...">
-                <button onclick="checkPassword(1, 'EXPOSED')">Quebrar Firewall</button>
-            </div>
+            <div id="action-e1"><input type="text" id="input-e1" placeholder="Digite a senha..."><button onclick="checkPassword(1, 'EXPOSED')">Quebrar Firewall</button></div>
             <p id="feedback-e1" class="feedback-error"></p>
-
             <div id="explanation-e1" class="hidden context-expansion">
                 <h3>📖 Database Atualizado!</h3>
-                <p>O termo <strong>'Exposed'</strong> (exposição) popularizou-se como uma forma de denúncia virtual. Porém, quando feito sem o devido processo legal e com intenção de humilhar, frequentemente foge do controle, estimula o linchamento virtual de forma covarde e configura crimes reais de difamação e injúria.</p>
+                <p>O termo <strong>'Exposed'</strong> popularizou-se como uma denúncia virtual. Porém, sem o devido processo legal e com intenção de humilhar, foge do controle, estimula o linchamento e configura crimes de difamação e injúria.</p>
                 <button class="btn-advance" onclick="nextScreen('screen-e2')">Avançar para Log 2</button>
             </div>
         </section>
@@ -57,19 +51,14 @@
         <!-- TELA 2: T1 - ENIGMA 2 -->
         <section id="screen-e2" class="screen">
             <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
-            <div class="terminal-header">Terminal de Recuperação - Arquivo 2/4</div>
+            <div class="terminal-header">Terminal de Recuperação - Arquivo 2/10</div>
             <p class="context"><strong>Fórum Anônimo:</strong> "Mano, cês são muito emocionados e não tankam nada 💀💀. É só um shitpost, o mlk é muito NPC. Chorou demais. F no chat."</p>
             <p class="mission"><strong>Missão:</strong> Classifique juridicamente esse ato de intimidação sistemática no meio digital que o agressor está chamando de "brincadeira".</p>
-            
-            <div id="action-e2">
-                <input type="text" id="input-e2" placeholder="Digite a senha...">
-                <button onclick="checkPassword(2, 'CYBERBULLYING')">Quebrar Firewall</button>
-            </div>
+            <div id="action-e2"><input type="text" id="input-e2" placeholder="Digite a senha..."><button onclick="checkPassword(2, 'CYBERBULLYING')">Quebrar Firewall</button></div>
             <p id="feedback-e2" class="feedback-error"></p>
-
             <div id="explanation-e2" class="hidden context-expansion">
                 <h3>📖 Database Atualizado!</h3>
-                <p>Esconder-se atrás de ironia, memes ou 'shitpost' não isenta ninguém da responsabilidade. O <strong>Cyberbullying</strong> é extremamente perigoso porque, diferente das agressões físicas, a internet não tem portões: a vítima é atacada e humilhada 24 horas por dia, de forma pública, mesmo estando dentro do seu próprio quarto.</p>
+                <p>Esconder-se atrás de 'shitpost' não isenta a responsabilidade. O <strong>Cyberbullying</strong> é perigoso porque a internet não tem portões: a vítima é atacada e humilhada 24h por dia, mesmo dentro do seu próprio quarto.</p>
                 <button class="btn-advance" onclick="nextScreen('screen-e3')">Avançar para Log 3</button>
             </div>
         </section>
@@ -77,19 +66,14 @@
         <!-- TELA 3: T1 - ENIGMA 3 -->
         <section id="screen-e3" class="screen">
             <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
-            <div class="terminal-header">Terminal de Recuperação - Arquivo 3/4</div>
+            <div class="terminal-header">Terminal de Recuperação - Arquivo 3/10</div>
             <p class="context"><strong>WhatsApp Status (Carol):</strong> "Não me envolvo 🤐☕. Cada um com seus B.O. Tô fora de treta." (Dezenas de visualizações no grupo, zero defesas).</p>
             <p class="mission"><strong>Missão:</strong> Qual é o fenômeno psicológico onde indivíduos não ajudam uma vítima simplesmente porque há outras pessoas presentes observando?</p>
-            
-            <div id="action-e3">
-                <input type="text" id="input-e3" placeholder="Digite a senha...">
-                <button onclick="checkPassword(3, 'EFEITO ESPECTADOR')">Quebrar Firewall</button>
-            </div>
+            <div id="action-e3"><input type="text" id="input-e3" placeholder="Digite a senha..."><button onclick="checkPassword(3, 'EFEITO ESPECTADOR')">Quebrar Firewall</button></div>
             <p id="feedback-e3" class="feedback-error"></p>
-
             <div id="explanation-e3" class="hidden context-expansion">
                 <h3>📖 Database Atualizado!</h3>
-                <p>O <strong>'Efeito Espectador'</strong> (Bystander Effect) ocorre quando a testemunha pensa: "alguém no grupo vai resolver isso, não vou me queimar". Na internet, um curtir, um "kkk" ou até mesmo o silêncio covarde são lidos pelo agressor como aprovação. Ficar neutro em situações de injustiça significa, sempre, escolher o lado do opressor.</p>
+                <p>O <strong>'Efeito Espectador'</strong> ocorre quando se pensa: "alguém no grupo vai resolver isso, não vou me queimar". Na internet, o silêncio covarde é lido pelo agressor como aprovação.</p>
                 <button class="btn-advance" onclick="nextScreen('screen-e4')">Avançar para Log 4</button>
             </div>
         </section>
@@ -97,24 +81,110 @@
         <!-- TELA 4: T1 - ENIGMA 4 -->
         <section id="screen-e4" class="screen">
             <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
-            <div class="terminal-header">Terminal de Recuperação - Arquivo 4/4</div>
+            <div class="terminal-header">Terminal de Recuperação - Arquivo 4/10</div>
             <p class="context"><strong>Ameaça Direta:</strong> "Já puxei o IP do Enzo. Mora na rua [apagado]. Se ele não vazar da escola, vou mandar entregar 30 pizzas na casa dele e explanar o CPF no Twitter."</p>
-            <p class="mission"><strong>Missão:</strong> Identifique o crime digital onde informações privadas e pessoais (endereço, documentos) são expostas com intenção maliciosa.</p>
-            
-            <div id="action-e4">
-                <input type="text" id="input-e4" placeholder="Digite a senha...">
-                <button onclick="checkPassword(4, 'DOXXING', true)">Quebrar Firewall</button>
-            </div>
+            <p class="mission"><strong>Missão:</strong> Identifique o crime digital onde informações privadas e pessoais são expostas com intenção maliciosa.</p>
+            <div id="action-e4"><input type="text" id="input-e4" placeholder="Digite a senha..."><button onclick="checkPassword(4, 'DOXXING')">Quebrar Firewall</button></div>
             <p id="feedback-e4" class="feedback-error"></p>
-
             <div id="explanation-e4" class="hidden context-expansion">
                 <h3>📖 Database Atualizado!</h3>
-                <p>O <strong>'Doxxing'</strong> (de "dropping dox" / vazar documentos) transpõe a raiva digital para o mundo físico. É um crime grave de violação de privacidade que coloca a integridade, a segurança e até a vida da vítima e de sua família em risco direto e real no mundo offline.</p>
+                <p>O <strong>'Doxxing'</strong> transpõe a raiva digital para o mundo físico. É um crime grave que coloca a integridade e segurança da vítima em risco real no mundo offline.</p>
+                <button class="btn-advance" onclick="nextScreen('screen-e5')">Avançar para Log 5</button>
+            </div>
+        </section>
+
+        <!-- TELA 5: T1 - ENIGMA 5 -->
+        <section id="screen-e5" class="screen">
+            <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
+            <div class="terminal-header">Terminal de Recuperação - Arquivo 5/10</div>
+            <p class="context"><strong>Log Instagram:</strong> A conta "@gatinha_do_9ano" começou a mandar DMs pro Alex com fotos roubadas, criada pelo Beto só para arrancar confissões e vazar depois.</p>
+            <p class="mission"><strong>Missão:</strong> Qual é o termo para a prática de criar identidades falsas nas redes para enganar e atrair pessoas emocionalmente?</p>
+            <div id="action-e5"><input type="text" id="input-e5" placeholder="Digite a senha..."><button onclick="checkPassword(5, 'CATFISH')">Quebrar Firewall</button></div>
+            <p id="feedback-e5" class="feedback-error"></p>
+            <div id="explanation-e5" class="hidden context-expansion">
+                <h3>📖 Database Atualizado!</h3>
+                <p>O <strong>'Catfish'</strong> causa danos psicológicos profundos pela traição de confiança. Frequentemente, a fraude de identidade evolui para crimes de extorsão ou roubo de dados pessoais.</p>
+                <button class="btn-advance" onclick="nextScreen('screen-e6')">Avançar para Log 6</button>
+            </div>
+        </section>
+
+        <!-- TELA 6: T1 - ENIGMA 6 -->
+        <section id="screen-e6" class="screen">
+            <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
+            <div class="terminal-header">Terminal de Recuperação - Arquivo 6/10</div>
+            <p class="context"><strong>Fórum Anônimo:</strong> "Peguei a foto do 🤓 e joguei naquela IA. O vídeo dele fazendo dancinha de calcinha ficou perfeito. Vou soltar no grupo."</p>
+            <p class="mission"><strong>Missão:</strong> Identifique a tecnologia/crime que utiliza IA para criar vídeos falsos super-realistas trocando o rosto da vítima.</p>
+            <div id="action-e6"><input type="text" id="input-e6" placeholder="Digite a senha..."><button onclick="checkPassword(6, 'DEEPFAKE')">Quebrar Firewall</button></div>
+            <p id="feedback-e6" class="feedback-error"></p>
+            <div id="explanation-e6" class="hidden context-expansion">
+                <h3>📖 Database Atualizado!</h3>
+                <p>A <strong>'Deepfake'</strong> usa aprendizado de máquina para manipulação audiovisual. Quando usada para difamação ou exposição vexatória, destrói carreiras e vidas, sendo dificílimo apagar os rastros da internet.</p>
+                <button class="btn-advance" onclick="nextScreen('screen-e7')">Avançar para Log 7</button>
+            </div>
+        </section>
+
+        <!-- TELA 7: T1 - ENIGMA 7 -->
+        <section id="screen-e7" class="screen">
+            <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
+            <div class="terminal-header">Terminal de Recuperação - Arquivo 7/10</div>
+            <p class="context"><strong>Log Twitter/X:</strong> "Subam a hashtag #AlexExpulso. Todo mundo mandando mensagem no perfil do colégio. Ninguém mais segue ou fala com ele."</p>
+            <p class="mission"><strong>Missão:</strong> Qual o fenômeno onde uma multidão virtual se une para boicotar e destruir a reputação de alguém socialmente?</p>
+            <div id="action-e7"><input type="text" id="input-e7" placeholder="Digite a senha..."><button onclick="checkPassword(7, 'CANCELAMENTO')">Quebrar Firewall</button></div>
+            <p id="feedback-e7" class="feedback-error"></p>
+            <div id="explanation-e7" class="hidden context-expansion">
+                <h3>📖 Database Atualizado!</h3>
+                <p>A <strong>'Cultura do Cancelamento'</strong> age como um tribunal sem direito de defesa. Muitas vezes perde a proporção corretiva e se torna apenas uma desculpa para linchamentos sádicos.</p>
+                <button class="btn-advance" onclick="nextScreen('screen-e8')">Avançar para Log 8</button>
+            </div>
+        </section>
+
+        <!-- TELA 8: T1 - ENIGMA 8 -->
+        <section id="screen-e8" class="screen">
+            <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
+            <div class="terminal-header">Terminal de Recuperação - Arquivo 8/10</div>
+            <p class="context"><strong>Notificações do Alex:</strong> 45 curtidas de madrugada em fotos de 2019. DM anônima: "Sei que você tá online. Vi você no shopping ontem."</p>
+            <p class="mission"><strong>Missão:</strong> Qual o termo que define o crime de perseguição digital obsessiva para causar medo e invasão de privacidade?</p>
+            <div id="action-e8"><input type="text" id="input-e8" placeholder="Digite a senha..."><button onclick="checkPassword(8, 'STALKING')">Quebrar Firewall</button></div>
+            <p id="feedback-e8" class="feedback-error"></p>
+            <div id="explanation-e8" class="hidden context-expansion">
+                <h3>📖 Database Atualizado!</h3>
+                <p>O <strong>'Stalking'</strong> (Cyberstalking) é um crime previsto em lei que gera terror psicológico constante, cerceando a liberdade da vítima por meio do monitoramento digital contínuo.</p>
+                <button class="btn-advance" onclick="nextScreen('screen-e9')">Avançar para Log 9</button>
+            </div>
+        </section>
+
+        <!-- TELA 9: T1 - ENIGMA 9 -->
+        <section id="screen-e9" class="screen">
+            <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
+            <div class="terminal-header">Terminal de Recuperação - Arquivo 9/10</div>
+            <p class="context"><strong>Log Discord:</strong> "Vou postar que o time perdeu por culpa dele só pra ver ele surtar no chat de voz. Ele sempre cai nessa kkkk."</p>
+            <p class="mission"><strong>Missão:</strong> Qual é a gíria digital para uma postagem feita de forma proposital apenas para irritar e provocar uma reação explosiva?</p>
+            <div id="action-e9"><input type="text" id="input-e9" placeholder="Digite a senha..."><button onclick="checkPassword(9, 'BAIT')">Quebrar Firewall</button></div>
+            <p id="feedback-e9" class="feedback-error"></p>
+            <div id="explanation-e9" class="hidden context-expansion">
+                <h3>📖 Database Atualizado!</h3>
+                <p>Postagens do tipo <strong>'Bait'</strong> (isca) visam engajamento através da raiva. A melhor defesa contra trolls e agressores virtuais que usam essa tática é a estratégia de "não alimentar o troll" (não responder).</p>
+                <button class="btn-advance" onclick="nextScreen('screen-e10')">Avançar para Log 10</button>
+            </div>
+        </section>
+
+        <!-- TELA 10: T1 - ENIGMA 10 -->
+        <section id="screen-e10" class="screen">
+            <img src="images/image02.png" alt="Arquivos Hackeados" class="header-img">
+            <div class="terminal-header">Terminal de Recuperação - Arquivo 10/10</div>
+            <p class="context"><strong>Log WhatsApp:</strong> Alex confronta: "Por que me humilhou na call?". Beto: "Mano, eu tava brincando, você distorce tudo. Você precisa de psiquiatra, tá louco."</p>
+            <p class="mission"><strong>Missão:</strong> Qual é a tática de abuso em que o agressor manipula a vítima para que ela duvide da própria sanidade e percepção?</p>
+            <!-- Atenção para o parâmetro 'true' no checkPassword, indicando ser o último enigma -->
+            <div id="action-e10"><input type="text" id="input-e10" placeholder="Digite a senha..."><button onclick="checkPassword(10, 'GASLIGHTING', true)">Quebrar Firewall Final</button></div>
+            <p id="feedback-e10" class="feedback-error"></p>
+            <div id="explanation-e10" class="hidden context-expansion">
+                <h3>📖 Database Atualizado!</h3>
+                <p>O <strong>'Gaslighting'</strong> é uma violência silenciosa. O agressor inverte a culpa, banaliza o sentimento da vítima e a confunde até que ela perca a confiança em si mesma para denunciar os abusos sofridos.</p>
                 <button class="btn-advance" onclick="nextScreen('screen-transition')">Iniciar Protocolo de Recuperação</button>
             </div>
         </section>
 
-        <!-- TELA 5: TRANSIÇÃO -->
+        <!-- TELA TRANSIÇÃO -->
         <section id="screen-transition" class="screen transition-screen">
             <img src="images/image03.png" alt="Sistema Comprometido" class="header-img">
             <h1>SISTEMA COMPROMETIDO</h1>
@@ -124,37 +194,64 @@
             <button onclick="startSeason2()">Assumir o Controle</button>
         </section>
 
-        <!-- TELA 6: T2 - SIMULADOR DINÂMICO -->
+        <!-- TELA T2 - SIMULADOR -->
         <section id="screen-simulator" class="screen">
             <img src="images/image03.png" alt="Redes Sociais" class="header-img">
             <div class="timer-bar"><div id="timer-fill"></div></div>
             <h2 id="sim-title">Título</h2>
             <p id="sim-context" class="context">Contexto da situação...</p>
-            <div id="sim-options" class="options-container">
-                <!-- Botões gerados via JS -->
-            </div>
+            <div id="sim-options" class="options-container"></div>
         </section>
 
-        <!-- TELA 7: RESULTADO FINAL -->
+        <!-- TELA FINAL -->
         <section id="screen-result" class="screen result-screen">
             <img src="images/image04.png" alt="Resultado Final" class="header-img">
             <h1>Relatório do Servidor</h1>
             <h2 id="final-status">Status</h2>
             <p id="final-desc">Descrição do resultado.</p>
+            
             <div class="final-stats">
                 <p><strong>XP Final:</strong> <span id="final-xp"></span></p>
                 <div class="badges-list-container">
                     <strong>Inventário de Badges:</strong>
                     <ul id="final-badges" class="badges-list"></ul>
                 </div>
+                
+                <!-- GLOSSÁRIO DE BADGES (Accordion) -->
+                <details class="glossary-section">
+                    <summary>📚 O que significam essas Badges?</summary>
+                    <div class="glossary-content">
+                        <p><strong>🛡️ Tank / Vanguard:</strong> Jogadores da linha de frente que protegem a equipe e absorvem o dano.</p>
+                        <p><strong>🚑 Healer / Suporte:</strong> Jogadores focados em curar e ajudar aliados secretamente ou publicamente.</p>
+                        <p><strong>👑 Game Master / Admin:</strong> Autoridade máxima. Quem usa as regras corretas para banir o ódio.</p>
+                        <p><strong>👻 Lurker / Camper / AFK:</strong> Quem fica apenas observando, escondido, sem interagir e omisso.</p>
+                        <p><strong>🐑 NPC:</strong> (Non-Playable Character) Quem não tem opinião própria e segue a manada.</p>
+                        <p><strong>🔥 DPS Tóxico / Griefer / Troll:</strong> Jogador agressivo que foca em causar dano, destruir o jogo dos outros e gerar o caos.</p>
+                        <p><strong>🏃 Rage Quit / Dodge:</strong> Abandonar a partida por raiva ou medo, fugindo da responsabilidade.</p>
+                    </div>
+                </details>
             </div>
 
-            <!-- NOVA SEÇÃO: RELATÓRIO FINAL -->
+            <!-- RELATÓRIO FINAL DIVIDIDO EM 3 -->
             <div class="report-section">
-                <h3>📝 Registro da Guilda</h3>
-                <p style="font-size: 14px;">O que a sua equipe achou da série, das discussões em sala e desta simulação?</p>
-                <textarea id="final-report-text" rows="5" placeholder="Digite as conclusões do grupo aqui..."></textarea>
-                <button id="submit-report-btn" onclick="submitFinalReport()">Enviar Dados para o Prof. Fernando</button>
+                <h3>📝 Relatório da Guilda</h3>
+                
+                <div class="form-group">
+                    <label>1. O que vocês acharam da série?</label>
+                    <textarea id="report-q1" rows="3" placeholder="Sua resposta..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>2. As discussões levantadas em aula foram pertinentes ao seu cotidiano?</label>
+                    <textarea id="report-q2" rows="3" placeholder="Sua resposta..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>3. E sobre este trabalho, qual a avaliação de vocês?</label>
+                    <textarea id="report-q3" rows="3" placeholder="Sua resposta..."></textarea>
+                </div>
+
+                <button id="submit-report-btn" onclick="submitFinalReport()">Enviar Dados para a Coordenação</button>
             </div>
 
             <p id="sync-message" class="small-text hidden">Sincronizando dados com a base da escola...</p>
