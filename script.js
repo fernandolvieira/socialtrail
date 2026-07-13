@@ -1,5 +1,5 @@
 // === COLOQUE A SUA URL AQUI DENTRO DAS ASPAS ===
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwluLT0RgSdpgX9vwK2gvV0rbRMV7nSmbXQxex2ojLFdPQcaZKF59-P39BdVsVfUHW1/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwluLT0RgSdpgX9vwk2gvV0rbRMV7nSmbXQxex2ojLFdPQcaZKF59-P39BdvSVfUHW1/exec";
 
 // VARIÁVEIS DE ESTADO
 let teamName = "";
@@ -10,7 +10,6 @@ let currentDecision = 0;
 let timerInterval;
 let timeLeft = 30;
 
-// Variáveis de Tempo Total e Status
 let timeStart;
 let timeEnd;
 let totalSeconds = 0;
@@ -110,7 +109,7 @@ const t2Decisions = [
     }
 ];
 
-// FUNÇÕES DE NAVEGAÇÃO E UI
+// NAVEGAÇÃO E UI
 function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
@@ -140,7 +139,6 @@ function startGame() {
     }
     teamName = nameInput;
     timeStart = new Date(); 
-    
     showScreen('screen-briefing');
 }
 
@@ -150,7 +148,7 @@ function startEnigmas() {
     showScreen('screen-e1');
 }
 
-// LÓGICA DA TEMPORADA 1
+// TEMPORADA 1 (10 Enigmas)
 function checkPassword(enigmaNum, correctPassword, isLast = false) {
     const inputId = `input-e${enigmaNum}`;
     const feedbackId = `feedback-e${enigmaNum}`;
@@ -173,7 +171,7 @@ function checkPassword(enigmaNum, correctPassword, isLast = false) {
     }
 }
 
-// LÓGICA DA TEMPORADA 2
+// TEMPORADA 2
 function startSeason2() {
     loadDecision();
     showScreen('screen-simulator');
@@ -231,12 +229,11 @@ function makeChoice(xpDelta, badge) {
     updateXPUI(xpDelta);
     badges.push(badge);
     updateStatusBarT2();
-    
     currentDecision++;
     loadDecision();
 }
 
-// FINALIZAÇÃO E APRESENTAÇÃO DE DADOS
+// RESULTADOS E ENVIO
 function endGame() {
     timeEnd = new Date();
     totalSeconds = Math.floor((timeEnd - timeStart) / 1000); 
@@ -275,26 +272,29 @@ function endGame() {
     }
 }
 
-// ENVIO DE DADOS APÓS RELATÓRIO
+// CONCATENAÇÃO DO RELATÓRIO EM UMA VARIÁVEL E ENVIO
 function submitFinalReport() {
-    const reportText = document.getElementById('final-report-text').value.trim();
+    const q1 = document.getElementById('report-q1').value.trim();
+    const q2 = document.getElementById('report-q2').value.trim();
+    const q3 = document.getElementById('report-q3').value.trim();
     
-    if (reportText === "") {
-        alert("Por favor, a guilda precisa preencher as conclusões do relatório antes de enviar.");
+    if (q1 === "" || q2 === "" || q3 === "") {
+        alert("Por favor, a guilda precisa preencher as três respostas do relatório antes de enviar.");
         return;
     }
 
-    // Trava o botão para não enviarem duas vezes
+    // Juntando as 3 respostas para enviar para a única coluna de "Relatório" da planilha
+    const combinedReport = `1. SÉRIE: ${q1} | 2. DISCUSSÕES: ${q2} | 3. AVALIAÇÃO: ${q3}`;
+
     const btn = document.getElementById('submit-report-btn');
     btn.innerText = "Enviando para os Servidores...";
     btn.disabled = true;
 
     document.getElementById('sync-message').classList.remove('hidden');
 
-    sendDataToSheets(finalStatusGlobal, reportText);
+    sendDataToSheets(finalStatusGlobal, combinedReport);
 }
 
-// FUNÇÃO PARA ENVIAR AO GOOGLE SHEETS
 function sendDataToSheets(statusText, reportText) {
     const data = {
         equipe: teamName,
@@ -302,7 +302,7 @@ function sendDataToSheets(statusText, reportText) {
         status: statusText,
         medalhas: badges.join(', '),
         tempoTotal: totalSeconds,
-        relatorio: reportText // <-- Novo campo adicionado!
+        relatorio: reportText 
     };
 
     fetch(GOOGLE_SHEETS_URL, {
