@@ -1,5 +1,4 @@
-// === COLOQUE A SUA URL AQUI DENTRO DAS ASPAS ===
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwluLT0RgSdpgX9vwk2gvV0rbRMV7nSmbXQxex2ojLFdPQcaZKF59-P39BdvSVfUHW1/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwluLT0RgSdpgX9vwK2gvV0rbRMV7nSmbXQxex2ojLFdPQcaZKF59-P39BdVsVfUHW1/exec";
 
 // VARIÁVEIS DE ESTADO
 let teamName = "";
@@ -295,6 +294,7 @@ function submitFinalReport() {
     sendDataToSheets(finalStatusGlobal, combinedReport);
 }
 
+// FUNÇÃO PARA ENVIAR AO GOOGLE SHEETS (CORRIGIDA PARA BYPASS DE CORS)
 function sendDataToSheets(statusText, reportText) {
     const data = {
         equipe: teamName,
@@ -307,16 +307,21 @@ function sendDataToSheets(statusText, reportText) {
 
     fetch(GOOGLE_SHEETS_URL, {
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'no-cors', // Fundamental para não travar no navegador
         headers: {
-            'Content-Type': 'application/json'
+            // A MUDANÇA ESTÁ AQUI: Trocamos application/json por text/plain
+            'Content-Type': 'text/plain;charset=utf-8' 
         },
         body: JSON.stringify(data)
     }).then(() => {
+        // Como estamos em no-cors, o then é disparado assim que o dado sai do navegador
         document.getElementById('sync-message').innerText = "✅ Dados sincronizados no servidor da escola!";
         document.getElementById('sync-message').style.color = "var(--success)";
+        console.log("Envio disparado para o Google.");
     }).catch(err => {
         document.getElementById('sync-message').innerText = "❌ Falha na conexão com o banco de dados principal.";
         document.getElementById('sync-message').style.color = "var(--error)";
+        console.error("Erro no envio:", err);
     });
+}
 }
