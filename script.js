@@ -1,3 +1,4 @@
+// === URL DO SEU GOOGLE APPS SCRIPT ===
 const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwluLT0RgSdpgX9vwK2gvV0rbRMV7nSmbXQxex2ojLFdPQcaZKF59-P39BdVsVfUHW1/exec";
 
 // VARIÁVEIS DE ESTADO
@@ -156,6 +157,7 @@ function checkPassword(enigmaNum, correctPassword, isLast = false) {
     const normalizedGuess = guess.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const normalizedCorrect = correctPassword.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
+    // 'PULAR' é o código secreto para você testar rapidamente
     if (normalizedGuess === normalizedCorrect || guess === "PULAR") { 
         document.getElementById(feedbackId).innerText = "Firewall Quebrado! +20 XP";
         document.getElementById(feedbackId).style.color = "var(--success)";
@@ -294,7 +296,7 @@ function submitFinalReport() {
     sendDataToSheets(finalStatusGlobal, combinedReport);
 }
 
-// FUNÇÃO PARA ENVIAR AO GOOGLE SHEETS (CORRIGIDA PARA BYPASS DE CORS)
+// CORREÇÃO DO BLOQUEIO CORS - AGORA USANDO TEXT/PLAIN
 function sendDataToSheets(statusText, reportText) {
     const data = {
         equipe: teamName,
@@ -309,19 +311,16 @@ function sendDataToSheets(statusText, reportText) {
         method: 'POST',
         mode: 'no-cors', // Fundamental para não travar no navegador
         headers: {
-            // A MUDANÇA ESTÁ AQUI: Trocamos application/json por text/plain
-            'Content-Type': 'text/plain;charset=utf-8' 
+            'Content-Type': 'text/plain;charset=utf-8' // Disfarçando o JSON para o navegador permitir o envio
         },
         body: JSON.stringify(data)
     }).then(() => {
-        // Como estamos em no-cors, o then é disparado assim que o dado sai do navegador
+        // Como o modo é no-cors, o sucesso significa que o envio foi disparado para o Google
         document.getElementById('sync-message').innerText = "✅ Dados sincronizados no servidor da escola!";
         document.getElementById('sync-message').style.color = "var(--success)";
-        console.log("Envio disparado para o Google.");
     }).catch(err => {
         document.getElementById('sync-message').innerText = "❌ Falha na conexão com o banco de dados principal.";
         document.getElementById('sync-message').style.color = "var(--error)";
-        console.error("Erro no envio:", err);
+        console.error("Erro no envio: ", err);
     });
-}
 }
